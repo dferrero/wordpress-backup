@@ -1,6 +1,17 @@
 WordPress Backup
 ===============
 
+This script is based on jamesrascal/wordpress-backup script, with a lot of changes to suit my personal environment.
+
+## Features
+
+- Just a single file. Nothing more needed.
+- Backup all websites stored in folders under `/var/www/html` (by default; it could be changed).
+- Profiles has been removed.
+- Custom variables are at the beginning of the script, identified by CAPSLOCKS.
+
+# jamesrascal's README
+
 This script is designed to backup any number of WordPress sites without the use of a plugin. 
 
 Features:
