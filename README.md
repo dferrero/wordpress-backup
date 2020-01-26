@@ -9,6 +9,7 @@ This script is based on `jamesrascal/wordpress-backup` repository, with a lot of
 - Custom variables are at the beginning of the script, identified by CAPSLOCKS.
 - Backups based on hashes
 
+Execution example:
 ```
 root@wp-blogs:~/scripts/wordpress-backup# bash web-backups.sh
 Starting backup from /var/www/html/xxxxx
