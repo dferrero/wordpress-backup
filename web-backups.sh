@@ -1,7 +1,19 @@
 #!/bin/bash
 WEBPATH=/var/www/html
 BACKUP_LOCATION=/home/backups
-KEEPDAYS=8
+KEEPBACKUPS=5
+
+function apacheBackup {
+    echo "Work in progress"
+}
+
+function daysBackup {
+    echo "Work in progress"
+}
+
+function hashBackup {
+    echo "Work in progress"
+}
 
 for webdir in `find $WEBPATH -maxdepth 1 -mindepth 1 -type d`; do 
     currentdir=`echo $webdir | cut -d'/' -f5`
@@ -43,6 +55,28 @@ for webdir in `find $WEBPATH -maxdepth 1 -mindepth 1 -type d`; do
         tar zcPf ./${backupname}.tar.gz ${webdir}
     fi
 
-    #Deletes any Backup older than X days
-    find ${BACKUP_LOCATION}/${currentdir}/ -type f -mtime +${KEEPDAYS} -exec rm {} \;
+    # Command to keep last X backups based on days instead of hashes
+    # find ${BACKUP_LOCATION}/${currentdir}/ -type f -mtime +${KEEPBACKUPS} -exec rm {} \;
+    # TO DO: Move to procedure
+    
+    # Keeps last $KEEPBACKUPS backups, based on sha256. If they are more, they'll be deleted
+    # TO DO: Move to procedure
+    previousHash="0"
+    count=0
+    backupPath="${BACKUP_LOCATION}/${currentdir}"
+    for currentFile in `ls -t $backupPath`; do
+	currentHash=`sha256sum $currentFile | cut -d' ' -f1`
+	if [ $count -lt $KEEPBACKUPS ] ; then
+	    if [ $currentHash = $previousHash ]; then
+	    	echo "rm -f $backupPath/$currentFile"
+	    else
+	    	previousHash=$currentHash
+		echo "Saved hash $currentHash from file $backupPath/$currentFile"
+	    fi
+	    count=$((count+1))
+	    echo "Count current value: $count"
+	else
+	    echo "rm -f $backupPath/$currentFile"
+	fi
+    done
 done
