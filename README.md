@@ -50,8 +50,9 @@ rm -f /home/backups/yyyyy/191127-yyyyy.tar.gz
 ```
 
 ## Work in Progress
+
 - [ ] Backup of `apache2` folder
 - [ ] Backup of `letsencrypt` folder
 - [ ] To add params for use last X days backups or last X hashes backups
 - [ ] To create a `-verbose` mode
-- [x] Change last backups from X days to X number of backups (remove is based on hash)
+- [ ] To add `-size` to backup info
